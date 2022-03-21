@@ -1,0 +1,162 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Knight.tscn" type="PackedScene" id=1]
+[ext_resource path="res://MobileControls.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enviorment/magic-cliffs-preview-detail.png" type="Texture" id=3]
+[ext_resource path="res://Enviorment/tileset.png" type="Texture" id=4]
+[ext_resource path="res://CanvasLayerpausemenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/Level1.gd" type="Script" id=6]
+[ext_resource path="res://flying rock.gd" type="Script" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 579, 59.75 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 68, 217.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 234.5, 68 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 137, 304.25 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 522, 45, 58, 45 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 23, -9 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "updown"
+length = 4.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 23, -9 ), Vector2( 23, 194 ), Vector2( 23, -9 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 528, 42.5 )
+
+[node name="Level1" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Magic-cliffs-preview-detail" type="Sprite" parent="."]
+position = Vector2( 1018, 294 )
+texture = ExtResource( 3 )
+
+[node name="CanvasLayer" parent="." instance=ExtResource( 2 )]
+
+[node name="PauseCanvasLayer" parent="." instance=ExtResource( 5 )]
+
+[node name="Knight" parent="." instance=ExtResource( 1 )]
+position = Vector2( 34, 250 )
+
+[node name="Camera2D" type="Camera2D" parent="Knight"]
+current = true
+limit_left = -5
+limit_top = -4
+limit_right = 2040
+limit_bottom = 550
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_left = 0.5
+drag_margin_top = 0.5
+drag_margin_right = 0.5
+drag_margin_bottom = 0.5
+editor_draw_limits = true
+
+[node name="Object" type="StaticBody2D" parent="."]
+
+[node name="rock" type="CollisionPolygon2D" parent="Object"]
+position = Vector2( -7, -6 )
+polygon = PoolVector2Array( 637, 159, 629, 171, 629, 189, 635, 194, 635, 207, 642, 213, 647, 221, 650, 221, 655, 218, 669, 218, 679, 225, 689, 218, 695, 207, 701, 209, 705, 212, 712, 206, 717, 206, 719, 201, 722, 192, 724, 189, 724, 180, 724, 171, 715, 160 )
+
+[node name="rock2" type="CollisionPolygon2D" parent="Object"]
+position = Vector2( -9, -7 )
+polygon = PoolVector2Array( 446, 158, 440, 168, 438, 190, 441, 194, 442, 211, 447, 218, 454, 221, 462, 221, 469, 214, 478, 214, 481, 218, 495, 205, 496, 198, 502, 189, 502, 179, 500, 172, 491, 160 )
+
+[node name="land" type="CollisionShape2D" parent="Object"]
+position = Vector2( 576, 365 )
+shape = SubResource( 1 )
+
+[node name="left stop" type="CollisionShape2D" parent="Object"]
+position = Vector2( -68, 208.5 )
+shape = SubResource( 2 )
+
+[node name="bigrock" type="CollisionPolygon2D" parent="Object"]
+polygon = PoolVector2Array( 1354, 260, 1369, 257, 1517, 252, 1530, 266, 1530, 287, 1518, 297, 1511, 317, 1511, 339, 1496, 347, 1496, 356, 1478, 360, 1478, 371, 1474, 377, 1466, 368, 1456, 372, 1451, 375, 1444, 392, 1441, 401, 1436, 392, 1436, 378, 1417, 369, 1412, 383, 1400, 389, 1400, 383, 1406, 369, 1379, 336, 1376, 332, 1361, 329, 1358, 320, 1366, 302, 1357, 293, 1349, 293, 1345, 276 )
+
+[node name="rock3" type="CollisionPolygon2D" parent="Object"]
+polygon = PoolVector2Array( 1529, 453, 1587, 453, 1595, 453, 1605, 458, 1607, 468, 1607, 486, 1602, 501, 1602, 510, 1596, 506, 1584, 513, 1566, 522, 1553, 513, 1541, 511, 1538, 522, 1535, 511, 1526, 501, 1523, 509, 1518, 514, 1515, 497, 1512, 485, 1512, 473, 1512, 465 )
+
+[node name="land2" type="CollisionShape2D" parent="Object"]
+position = Vector2( 1961.5, 532 )
+shape = SubResource( 3 )
+
+[node name="right stop" type="CollisionShape2D" parent="Object"]
+position = Vector2( 2207, 297 )
+shape = SubResource( 4 )
+
+[node name="flying rock" type="KinematicBody2D" parent="."]
+position = Vector2( 23, -9 )
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="flying rock"]
+position = Vector2( 1215, 176 )
+scale = Vector2( 1.99138, 2.06111 )
+frames = SubResource( 6 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="flying rock"]
+polygon = PoolVector2Array( 1195, 153, 1189, 162, 1188, 181, 1192, 189, 1191, 207, 1194, 211, 1203, 217, 1209, 217, 1218, 214, 1221, 211, 1225, 210, 1229, 212, 1235, 211, 1244, 198, 1249, 189, 1251, 177, 1251, 167, 1247, 158, 1241, 152 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="flying rock"]
+anims/RESET = SubResource( 7 )
+anims/updown = SubResource( 8 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 1365, 639 )
+monitorable = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 139, 3 )
+shape = SubResource( 9 )
+
+[connection signal="body_entered" from="Area2D" to="Knight" method="_on_Area2D_body_entered"]

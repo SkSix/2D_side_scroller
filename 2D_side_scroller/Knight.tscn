@@ -1,0 +1,107 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://Maincharacter/Idle.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Knight.gd" type="Script" id=2]
+[ext_resource path="res://Maincharacter/Run.png" type="Texture" id=3]
+[ext_resource path="res://Maincharacter/Jump.png" type="Texture" id=4]
+[ext_resource path="res://Maincharacter/Attacks.png" type="Texture" id=5]
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 168, 0, 42, 64 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 42, 0, 42, 64 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 168, 0, 42, 64 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 42, 64, 42, 64 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 168, 64, 42, 64 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 42, 128, 42, 64 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 168, 128, 42, 64 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 42, 192, 42, 64 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 168, 192, 42, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 42, 0, 42, 64 )
+
+[sub_resource type="AtlasTexture" id=30]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 384, 0, 128, 64 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 13 ) ],
+"loop": true,
+"name": "jump",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ) ],
+"loop": true,
+"name": "run",
+"speed": 13.0
+}, {
+"frames": [ SubResource( 4 ) ],
+"loop": true,
+"name": "idel",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 30 ) ],
+"loop": true,
+"name": "slash",
+"speed": 0.5
+} ]
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 4.12499
+height = 14.272
+
+[node name="Knight" type="KinematicBody2D"]
+position = Vector2( 8, -14 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -9, 13 )
+scale = Vector2( 1.19048, 1.25 )
+frames = SubResource( 2 )
+animation = "slash"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -7, 25 )
+scale = Vector2( 2.66667, 2.66406 )
+shape = SubResource( 3 )
